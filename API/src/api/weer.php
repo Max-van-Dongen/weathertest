@@ -6,7 +6,7 @@ $location = $_GET["plaats"];
 $ch = curl_init();
 
 // Set the URL and other options for the cURL session
-curl_setopt($ch, CURLOPT_URL, "http://api.weatherapi.com/v1/current.json?key=477c5508daea4eb0a05201914221512&q=$location&aqi=no");
+curl_setopt($ch, CURLOPT_URL, "http://api.weatherapi.com/v1/forecast.json?key=477c5508daea4eb0a05201914221512&q=$location&days=5&aqi=no&alerts=no");//"http://api.weatherapi.com/v1/current.json?key=477c5508daea4eb0a05201914221512&q=$location&aqi=no");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HEADER, false);
 

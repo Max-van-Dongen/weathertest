@@ -14,38 +14,37 @@
         <div class="weather-side">
             <div class="weather-gradient"></div>
             <div class="date-container">
-                <h2 class="date-dayname">Tuesday</h2><span class="date-day"><?= date("d M Y") ?></span><i class="location-icon" data-feather="map-pin"></i><span class="location" id="location">----</span>
+                <h2 class="date-dayname"><?= date("l") ?></h2><span class="date-day"><?= date("d M Y") ?></span><i class="location-icon" data-feather="map-pin"></i><span class="location" id="location">----</span>
             </div>
-            <div class="weather-container"><i class="weather-icon" id="feather" data-feather="sun"></i>
-                <h1 class="weather-temp" id="temp">29°C</h1>
-                <h3 class="weather-desc" id="condition">Sunny</h3>
+            <div class="weather-container"><i class="weather-icon" id="feather" ></i>
+                <h1 class="weather-temp" id="temp">--°C</h1>
+                <h3 class="weather-desc" id="condition">-----</h3>
             </div>
         </div>
         <div class="info-side">
             <div class="today-info-container">
                 <div class="today-info">
-                    <div class="precipitation"> <span class="title">PRECIPITATION</span><span class="value" id="precip">- mm</span>
+                    <div class="precipitation"> <span class="title">PRECIPITATION</span><span class="value" id="precip">-mm</span>
                         <div class="clear"></div>
                     </div>
-                    <div class="humidity"> <span class="title">HUMIDITY</span><span class="value" id="humid">-- %</span>
+                    <div class="humidity"> <span class="title">HUMIDITY</span><span class="value" id="humid">--%</span>
                         <div class="clear"></div>
                     </div>
-                    <div class="wind"> <span class="title">WIND</span><span class="value" id="wind">- km/h</span>
+                    <div class="wind"> <span class="title">WIND</span><span class="value" id="wind">-km/h</span>
                         <div class="clear"></div>
                     </div>
                 </div>
             </div>
             <div class="week-container">
                 <ul class="week-list">
-                    <li class="active"><i class="day-icon" data-feather="sun"></i><span class="day-name">Tue</span><span class="day-temp">29°C</span></li>
-                    <li><i class="day-icon" data-feather="cloud"></i><span class="day-name">Wed</span><span class="day-temp">21°C</span></li>
-                    <li><i class="day-icon" data-feather="cloud-snow"></i><span class="day-name">Thu</span><span class="day-temp">08°C</span></li>
-                    <li><i class="day-icon" data-feather="cloud-rain"></i><span class="day-name">Fry</span><span class="day-temp">19°C</span></li>
+                    <li class="active"><i class="day-icon" data-feather="sun"></i><span class="day-name"><?= date("D",strtotime("+1 day")) ?></span><span class="day-temp" id="forecast1">--°C</span></li>
+                    <li><i class="day-icon" data-feather="cloud"></i><span class="day-name"><?= date("D",strtotime("+2 days")) ?></span><span class="day-temp" id="forecast2">--°C</span></li>
+                    <li><i class="day-icon" data-feather="cloud-snow"></i><span class="day-name"><?= date("D",strtotime("+3 days")) ?></span><span class="day-temp" id="forecast3">--°C</span></li>
                     <div class="clear"></div>
                 </ul>
             </div>
             <div class="location-container">
-                <button class="location-button" onclick="getWeather()"> <i data-feather="refresh-cw"></i><span>Get Weather</span></button>
+                <button class="location-button" style="width:220px" onclick="getWeather()"> <i data-feather="refresh-cw"></i><span>Get Weather Data</span></button>
             </div>
         </div>
     </div>
@@ -62,12 +61,15 @@
         }
 
         function displayWeatherData(data) {
-            document.getElementById('precip').innerHTML = `${data.current.precip_mm}`;
-            document.getElementById('humid').innerHTML = `${data.current.humidity}`;
-            document.getElementById('wind').innerHTML = `${data.current.wind_kph}`;
+            document.getElementById('precip').innerHTML = `${data.current.precip_mm}mm`;
+            document.getElementById('humid').innerHTML = `${data.current.humidity}%`;
+            document.getElementById('wind').innerHTML = `${data.current.wind_kph}km/h`;
             document.getElementById('location').innerHTML = `${data.location.name}`;
-            document.getElementById('temp').innerHTML = `${data.current.temp_c}`;
+            document.getElementById('temp').innerHTML = `${data.current.temp_c}°C`;
             document.getElementById('condition').innerHTML = `${data.current.condition.text}`;
+            document.getElementById('forecast1').innerHTML = `${data.current.temp_c}°C`;
+            document.getElementById('forecast2').innerHTML = `${Math.floor(data.forecast.forecastday[1].day.avgtemp_c)}°C`;
+            document.getElementById('forecast3').innerHTML = `${Math.floor(data.forecast.forecastday[2].day.avgtemp_c)}°C`;
             switch (data.current.condition.text) {
                 case "Light rain":
                 case "Moderate rain":
@@ -236,11 +238,10 @@
         .week-list {
             list-style-type: none;
             padding: 0;
-            margin: 10px 35px;
+            margin: 10px 50px;
             -webkit-box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.25);
             box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.25);
             border-radius: 10px;
-            background: #
         }
 
         .week-list>li {
