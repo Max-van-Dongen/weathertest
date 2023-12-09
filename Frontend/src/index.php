@@ -16,7 +16,7 @@
             <div class="date-container">
                 <h2 class="date-dayname"><?= date("l") ?></h2><span class="date-day"><?= date("d M Y") ?></span><i class="location-icon" data-feather="map-pin"></i><span class="location" id="location">----</span>
             </div>
-            <div class="weather-container"><i class="weather-icon" id="feather" ></i>
+            <div class="weather-container"><i class="weather-icon" id="feather"></i>
                 <h1 class="weather-temp" id="temp">--°C</h1>
                 <h3 class="weather-desc" id="condition">-----</h3>
             </div>
@@ -37,9 +37,9 @@
             </div>
             <div class="week-container">
                 <ul class="week-list">
-                    <li class="active"><i class="day-icon" data-feather="sun"></i><span class="day-name"><?= date("D",strtotime("+1 day")) ?></span><span class="day-temp" id="forecast1">--°C</span></li>
-                    <li><i class="day-icon" data-feather="cloud"></i><span class="day-name"><?= date("D",strtotime("+2 days")) ?></span><span class="day-temp" id="forecast2">--°C</span></li>
-                    <li><i class="day-icon" data-feather="cloud-snow"></i><span class="day-name"><?= date("D",strtotime("+3 days")) ?></span><span class="day-temp" id="forecast3">--°C</span></li>
+                    <li class="active"><i class="day-icon" data-feather="sun"></i><span class="day-name"><?= date("D", strtotime("+1 day")) ?></span><span class="day-temp" id="forecast1">--°C</span></li>
+                    <li><i class="day-icon" data-feather="cloud"></i><span class="day-name"><?= date("D", strtotime("+2 days")) ?></span><span class="day-temp" id="forecast2">--°C</span></li>
+                    <li><i class="day-icon" data-feather="cloud-snow"></i><span class="day-name"><?= date("D", strtotime("+3 days")) ?></span><span class="day-temp" id="forecast3">--°C</span></li>
                     <div class="clear"></div>
                 </ul>
             </div>
@@ -57,7 +57,10 @@
             fetch(`http://localhost:8080/api/weer.php?plaats=${city}`)
                 .then(response => response.json())
                 .then(data => displayWeatherData(data))
-                .catch(error => console.error('Error:', error));
+                .catch(error => {
+            document.getElementById('condition').innerHTML = `ERROR`;
+                    console.error('Error:', error)
+                });
         }
 
         function displayWeatherData(data) {
