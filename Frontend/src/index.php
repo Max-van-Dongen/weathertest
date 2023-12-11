@@ -51,7 +51,7 @@
 
     <script>
         feather.replace()
-        var city = "<?= $_GET["location"] ?>";
+        var city = "<?= isset($_GET["location"])?$_GET["location"]:"Rotterdam" ?>";
 
         function getWeather() {
             fetch(`http://localhost:8080/api/weer.php?plaats=${city}`)
