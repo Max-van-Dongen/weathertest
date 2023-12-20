@@ -54,7 +54,7 @@
         var city = "<?= isset($_GET["location"])?$_GET["location"]:"Rotterdam" ?>";
 
         function getWeather() {
-            fetch(`http://localhost:8080/api/weer.php?plaats=${city}`)
+            fetch(`http://localhost:8089/api/weer.php?plaats=${city}`)
                 .then(response => response.json())
                 .then(data => displayWeatherData(data))
                 .catch(error => {
